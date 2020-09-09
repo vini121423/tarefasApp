@@ -12,8 +12,14 @@ export class ArmazenamentoService {
 	public salvarDados(chave: string, dados: any) {
 		if (chave.trim().length > 0 && dados) {
 			return this.storage.set(chave, dados)
-				.then(() => { console.log("SUCESSO"); return true; })
-				.catch(erro => { console.log("Erro ao gravar os dados", erro); return false; });
+				.then(() => {
+					console.log("SUCESSO");
+					return true;
+				})
+				.catch(erro => {
+					console.log("Erro ao gravar os dados", erro);
+					return false;
+				});
 		} else {
 			return false;
 		}
@@ -32,5 +38,14 @@ export class ArmazenamentoService {
 		} else {
 			return null;
 		}
+	}
+
+	public removerDados(chave: string) {
+		this.storage.remove(chave).then(() => {
+			console.log(chave);
+			console.log("Usuário removido com sucesso")
+		}).catch(erro => {
+			console.log(erro);
+		})
 	}
 }
