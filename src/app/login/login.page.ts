@@ -14,7 +14,7 @@ export class LoginPage implements OnInit {
 
   // Armazena informações do formulário
   public formLogin: FormGroup;
-  public usuarioAtivo:any;
+
 
   public mensagens_validacao = {
     email: [
@@ -44,14 +44,15 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
   }
-
+ 
   async ionViewWillEnter() {
-    const usuarioLogado = await this.usuarioService.buscarUsuarioLogado();
-    if (usuarioLogado && usuarioLogado.manterLogado) {
-      this.router.navigateByUrl('/home');
-      this.presentToast();
-    }
+   const usuarioLogado = await this.usuarioService.buscarUsuarioLogado();
+   if(usuarioLogado && usuarioLogado.manterLogado){
+	   this.router.navigateByUrl('/home');
+	   this.presentToast();
+   }
   }
+
 
   public async login() {
 
@@ -64,21 +65,17 @@ export class LoginPage implements OnInit {
         this.usuarioService.salvarUsuarioLogado(usuario);
         this.router.navigateByUrl('/home');
         this.presentToast();
-		
+
       } else {
         this.presentAlert('Advertência', 'Usuário ou senha inválidos!')
       }
-	  
+
     } else {
       this.presentAlert('Erro', 'Formulário inválido, confira os campos e tente novamente!')
     }
-	
+
   }
 
-  public async logout() {
-    this.usuarioService.logout(this.usuarioAtivo);
-    this.router.navigateByUrl('/login');
-  }
 
   async presentToast() {
     const toast = await this.toastCtrl.create({

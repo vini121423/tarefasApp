@@ -1,17 +1,20 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="tertiary">
     <ion-buttons>
+	
       <ion-back-button></ion-back-button>
+	  
+	  <ion-button (click)="efetuarLogout()" class="ion-text-left"> 
+      <ion-icon slot="end" name="exit-outline"></ion-icon>
+     </ion-button>
+	 
     </ion-buttons>
     <ion-title>
       Tarefas
     </ion-title>
-    <ion-button color="tertiary" fill="outline" (click)="efetuarLogout()">
-      <ion-icon name="logout"></ion-icon>
-    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
+<h1>Bem vindo a página HOME</h1>
 </ion-content>

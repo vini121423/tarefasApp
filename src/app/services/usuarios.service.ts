@@ -8,7 +8,8 @@ import { Usuario } from '../models/Usuario';
 export class UsuariosService {
 	public listaUsuarios = [];
 	public usuarioLocal: any;
-
+    usuarioLogado:any;
+	
 	constructor(private armazenamentoService: ArmazenamentoService) { }
 
 	public async buscarTodos() {
@@ -39,18 +40,18 @@ export class UsuariosService {
 		let usuario: Usuario;
 
 		await this.buscarTodos();
-
+           
 		const listaTemporaria = this.listaUsuarios.filter(usuarioArmazenado => {
 			return (usuarioArmazenado.email == email && usuarioArmazenado.senha == senha);
 		});
 
 		if (listaTemporaria.length > 0) {
 			usuario = listaTemporaria.reduce(item => item);
-			this.usuarioLocal = usuario;
 		}
 
 
 		return usuario;
+		
 	}
 
 	public salvarUsuarioLogado(usuario: Usuario) {
@@ -62,10 +63,9 @@ export class UsuariosService {
 		return await this.armazenamentoService.listarDados('usuarioLogado');
 	}
 
-	public async logout(usuario: Usuario) {
-		if (usuario.manterLogado) {
-			usuario.manterLogado = false;
-		}
-		this.armazenamentoService.removerDados(this.usuarioLocal);
+    /* CPF TESTE - 471.288.283-20 */
+	public async logout() {
+		this.armazenamentoService.removerDados('usuarioLogado');
 	}
+	
 }

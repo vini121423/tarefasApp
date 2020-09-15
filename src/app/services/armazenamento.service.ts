@@ -41,11 +41,13 @@ export class ArmazenamentoService {
 	}
 
 	public removerDados(chave: string) {
-		this.storage.remove(chave).then(() => {
-			console.log(chave);
-			console.log("Usuário removido com sucesso")
-		}).catch(erro => {
-			console.log(erro);
-		})
+		if (chave.trim().length > 0) {
+			return this.storage.remove(chave).then(teste => { 
+			return console.log('Usuário removido')
+			}).catch(erro=>{
+			  console.log('ERRO',erro);
+			  return null;
+			});
+	  }
 	}
 }
