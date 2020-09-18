@@ -63,8 +63,7 @@ export class UsuariosService {
 		return await this.armazenamentoService.listarDados('usuarioLogado');
 	}
 
-    /* CPF TESTE - 471.288.283-20 */
-	public async logout() {
+	public async removerUsuarioLogado() {
 		this.armazenamentoService.removerDados('usuarioLogado');
 	}
 	
