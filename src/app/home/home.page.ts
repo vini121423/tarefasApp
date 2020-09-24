@@ -13,16 +13,16 @@ export class HomePage {
   constructor(
     private router: Router,
     private usuarioService: UsuariosService,
-	public alertController: AlertController
+    public alertController: AlertController
   ) { }
-  
- async ionViewWillEnter() {
-   const usuarioLogado = await this.usuarioService.buscarUsuarioLogado();
-   if(!usuarioLogado){
-	   this.router.navigateByUrl('/login');
-   }
+
+  async ionViewWillEnter() {
+    const usuarioLogado = await this.usuarioService.buscarUsuarioLogado();
+    if (!usuarioLogado) {
+      this.router.navigateByUrl('/login');
+    }
   }
-  
+
   async exibirAlertaLogout() {
     const alert = await this.alertController.create({
       header: 'Confirmação',
