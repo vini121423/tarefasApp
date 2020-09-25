@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Usuario } from '../models/Usuario';
 import { UsuariosService } from '../services/usuarios.service';
+import { CpfValidator } from '../validators/cpf-validator';
 
 @Component({
 	selector: 'app-alterar-usuario',
@@ -24,7 +25,7 @@ export class AlterarUsuarioPage implements OnInit {
 			{ tipo: 'maxlength', msg: 'Insira no máximo 14 caracteres!' },
 			{ tipo: 'invalido', msg: 'CPF inválido!' }
 		],
-		data_nascimento: [
+		dataNascimento: [
 			{ tipo: 'required', msg: 'Campo obrigatório!' }
 		],
 		genero: [
@@ -52,6 +53,7 @@ export class AlterarUsuarioPage implements OnInit {
 
 		this.formAlterar = formBuilder.group({
 			nome: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+			cpf: ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(14), CpfValidator.cpfValido])],
 			dataNascimento: ['', Validators.compose([Validators.required])],
 			genero: ['', Validators.compose([Validators.required])],
 			celular: ['', Validators.compose([Validators.minLength(10), Validators.maxLength(16)])],
@@ -59,7 +61,7 @@ export class AlterarUsuarioPage implements OnInit {
 		});
 
 		this.preencherFormulario();
-		this.formAlterar.patchValue({ dataNascimento: this.usuario.dataNascimento.toISOString() })
+		
 	}
 
 	ngOnInit() {
@@ -72,6 +74,7 @@ export class AlterarUsuarioPage implements OnInit {
 		delete this.usuario.manterLogado;
 
 		this.formAlterar.setValue(this.usuario);
+		this.formAlterar.patchValue({ dataNascimento: this.usuario.dataNascimento.toISOString() });
 	}
 
 	public async salvar() {

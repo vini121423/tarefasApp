@@ -85,6 +85,6 @@ export class UsuariosService {
 
 		this.listaUsuarios[index] = usuario;
 
-		return await this.armazenamentoService.salvarDados(usuario);
+		return await this.armazenamentoService.salvarDados('usuarios',this.listaUsuarios);
 	}
 }

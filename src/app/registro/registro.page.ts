@@ -27,7 +27,7 @@ export class RegistroPage implements OnInit {
 			{ tipo: 'maxlength', msg: 'Insira no máximo 14 caracteres!' },
 			{ tipo: 'invalido', msg: 'CPF inválido!' }
 		],
-		data_nascimento: [
+		dataNascimento: [
 			{ tipo: 'required', msg: 'Campo obrigatório!' }
 		],
 		genero: [
@@ -60,7 +60,7 @@ export class RegistroPage implements OnInit {
 		this.formRegister = formBuilder.group({
 			nome: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
 			cpf: ['', Validators.compose([Validators.required, Validators.minLength(11), Validators.maxLength(14), CpfValidator.cpfValido])],
-			data_nascimento: ['', Validators.compose([Validators.required])],
+			dataNascimento: ['', Validators.compose([Validators.required])],
 			genero: ['', Validators.compose([Validators.required])],
 			celular: ['', Validators.compose([Validators.minLength(10), Validators.maxLength(16)])],
 			email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -83,7 +83,7 @@ export class RegistroPage implements OnInit {
 			let usuario = new Usuario();
 			usuario.nome = this.formRegister.value.nome;
 			usuario.cpf = this.formRegister.value.cpf;
-			usuario.dataNascimento = this.formRegister.value.data_nascimento;
+			usuario.dataNascimento = this.formRegister.value.dataNascimento;
 			usuario.genero = this.formRegister.value.genero;
 			usuario.celular = this.formRegister.value.celular;
 			usuario.email = this.formRegister.value.email;
